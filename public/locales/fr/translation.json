@@ -1,3 +1,69 @@
 {
-    "hi":"Bonjour"
+    "layout": {
+        "header": {
+            "title": "Tableau de Bord",
+            "desc": "Surveillance des projets"
+        },
+        "sidebar": {
+            "new-project": "Nouveau projet",
+            "dialog": {
+                "title": "Création d'un nouveau projet",
+                "form": {
+                    "project": {
+                        "name": "Nom du projet"
+                    },
+                    "tag": {
+                        "name": "Tag"
+                    },
+                    "endpoint-name": "Nom de l'endpoint"
+                }
+            }
+        }
+    },
+    "form": {
+        "project": {
+            "title": "Création d'un nouveau projet",
+            "info": "Ajouter un de vos projets afin de pouvoir l'ajouter à la surveillance et y accèder plus rapidement.",
+            "category": {
+                "label": "Catégorie"
+            },
+            "name": {
+                "label": "Name"
+            },
+
+            "tag": {
+                "label": "Tag",
+                "creation": "Création d'un tag",
+                "placeholder": "Nom du tag"
+            },
+            "directory-path": {
+                "label": "Séléctionner le dossier du projet",
+                "desc-api": "Veuillez sélectionner le dossier qui contient le fichier de la solution <bold>.sln</bold>",
+                "desc-other": "Veuillez sélectionner le dossier qui contient le fichier <bold>package.json</bold>"
+            },
+            "url-endpoint": {
+                "label": "Endpoint de test pour l'API",
+                "desc": "Indiquez l'adresse URL que l'application doit appeler pour s'assurer que votre API répond correctement.",
+                "placeholder": "Saisissez l'URL de ping..."
+            },
+            "error": {
+                "name": {
+                    "required": "Le nom du projet est obligatoire",
+                    "invalid": "Le nom n'est pas valide",
+                    "length": "Le nom doit contenir entre 3 et 30 caractères"
+                },
+                "url-endpoint": "L'URL doit commencer par http:// ou https://"
+            }
+        }
+    },
+    "shared": {
+        "confirm": "Confirmer",
+        "close": "Fermer",
+        "cancel": "Annuler",
+        "browse": "Parcourir",
+        "reset": "Réinitialiser",
+        "project": "projet",
+        "online": "En ligne",
+        "offline": "Hors ligne"
+    }
 }
