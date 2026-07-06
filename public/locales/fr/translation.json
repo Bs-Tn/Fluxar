@@ -25,7 +25,8 @@
             "title": "Création d'un nouveau projet",
             "info": "Ajouter un de vos projets afin de pouvoir l'ajouter à la surveillance et y accèder plus rapidement.",
             "category": {
-                "label": "Catégorie"
+                "label": "Catégorie",
+                "other": "Autre"
             },
             "name": {
                 "label": "Name"
@@ -60,10 +61,18 @@
         "confirm": "Confirmer",
         "close": "Fermer",
         "cancel": "Annuler",
+        "settings": "Paramètres",
         "browse": "Parcourir",
         "reset": "Réinitialiser",
         "project": "projet",
         "online": "En ligne",
-        "offline": "Hors ligne"
+        "offline": "Hors ligne",
+        "categories": {
+            "all": "Tous les projets",
+            "frontend": "Frontend",
+            "api": "Api",
+            "package": "Package",
+            "other": "Autres"
+        }
     }
 }

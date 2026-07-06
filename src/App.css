@@ -20,7 +20,9 @@
     --card-foreground: oklch(0.145 0 0);
     --popover: oklch(1 0 0);
     --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(64.607% 0.19433 41.116);
+    /* --primary: oklch(64.607% 0.19433 41.116); */
+    --primary: oklch(57% 0.14 36);
+
     --primary-foreground: oklch(1 0 0);
     --secondary: oklch(0.95 0.0058 264.53);
     --secondary-foreground: #030213;
@@ -141,11 +143,11 @@
 }
 
 .embla {
-    max-width: 48rem;
-    margin-top: 3rem;
-    --slide-height: 48rem;
+    max-width: 100%;
+    margin-top: 1rem;
+    --slide-height: 25rem;
     --slide-spacing: 1rem;
-    --slide-size: 20%;
+    --slide-size: 30%;
 }
 
 .embla__viewport {
@@ -155,7 +157,7 @@
 .embla__container {
     display: flex;
     touch-action: pan-x pinch-zoom;
-    margin-top: calc(var(--slide-spacing) * -1);
+    margin-top: calc(var(--slide-spacing));
     height: calc(var(--slide-spacing) + var(--slide-height));
     flex-direction: column;
 }
@@ -164,14 +166,12 @@
     transform: translate3d(0, 0, 0);
     flex: 0 0 var(--slide-size);
     min-height: 0;
-    padding-top: var(--slide-spacing);
 }
 
 .embla__slide__number {
-    border-radius: 100%;
     padding: 1rem;
-    height: 5rem; /* Ajustez selon vos besoins */
-    width: 5rem;
+    height: 5rem;
+    width: 10rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -186,7 +186,4 @@
 .embla__controls {
     display: grid;
     grid-template-columns: auto 1rem;
-    justify-content: space-between;
-    gap: 1.2rem;
-    margin-top: 1.8rem;
 }

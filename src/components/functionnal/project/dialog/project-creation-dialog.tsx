@@ -15,6 +15,8 @@ import { ProjectCategoryValue } from "@/types/form";
 import { Separator } from "@/components/ui/separator";
 import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { projectService } from "@/database/project";
+import { Project } from "@/types/database";
 
 type Props = {
     open: boolean;
@@ -29,15 +31,31 @@ const ProjectCreationDialog: FC<Props> = ({ open, onOpen }) => {
         defaultValues: {
             category: ProjectCategoryValue.FRONTEND,
             name: "",
-            tag: undefined,
+            tag: { name: "", color: "" },
             directoryPath: "",
             urlEndpoint: undefined,
         },
     });
 
-    const onSubmit: SubmitHandler<ProjectSchema> = (data) => {
-        console.log(data);
+    const onSubmit: SubmitHandler<ProjectSchema> = async (data) => {
+        try {
+            const newProject: Project = {
+                category: data.category,
+                name: data.name,
+                tag: data.tag ?? undefined,
+                directoryPath: data.directoryPath,
+                urlEndpoint: data.urlEndpoint ?? undefined,
+            };
+
+            await projectService.createDoc(newProject);
+
+            onOpen(!open);
+            methods.reset();
+        } catch (error) {
+            console.error(error);
+        }
     };
+
     return (
         <Dialog open={open} onOpenChange={onOpen} disablePointerDismissal={true}>
             <DialogContent className="flex flex-col gap-3 min-w-1/3 px-12 py-8">

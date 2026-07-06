@@ -1,19 +1,20 @@
 import { database } from "@/database/instance";
-import { PouchProjectDb, Project } from "@/database/project";
 import { generateRandomID, getCurrentDate } from "@/lib";
+import { PouchTagDb, Tag, TagDocument } from "@/types/database";
 
-const createDoc = async (project: Project) => {
-    const newProject: PouchProjectDb = {
+const createDoc = async (tag: Tag) => {
+    const newTag: PouchTagDb = {
         _id: generateRandomID(),
-        type: "project",
+        type: "tag",
         createdAt: getCurrentDate(),
         modifiedAt: getCurrentDate(),
-        ...project,
+        ...tag,
     };
-    return await database.put(newProject);
+    return await database.put(newTag);
 };
 
-const getAll = async () => await database.find({ selector: { type: "project" } });
+const getAllDoc = async () =>
+    (await database.find({ selector: { type: "tag" } })).docs as TagDocument[];
 
 const deleteDoc = async (id: string) => {
     try {
@@ -24,8 +25,8 @@ const deleteDoc = async (id: string) => {
     }
 };
 
-export const projectService = {
+export const tagService = {
     createDoc,
-    getAll,
+    getAllDoc,
     deleteDoc,
 };

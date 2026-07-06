@@ -1,12 +1,11 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Field, FieldDescription, FieldFormError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Controller, useFormContext, useFormState } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import {
     Select,
     SelectContent,
     SelectItem,
-    SelectSeparator,
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
@@ -16,26 +15,16 @@ import { ProjectCategory, ProjectCategoryValue } from "@/types/form";
 import { Button } from "@/components/ui/button";
 import { FolderOpen } from "lucide-react";
 import { Trans, useTranslation } from "react-i18next";
+import TagField from "./tag-field";
 
 const ProjectCreationForm = () => {
     const { t } = useTranslation();
     const { control, watch, setError, setValue } = useFormContext();
-    const { errors } = useFormState();
-    console.log(errors);
-    const [showTagInput, setShowTagInput] = useState<boolean>(false);
-    const [tagName, setTagName] = useState<string>("");
 
     const selectedTypeValue = watch("category") as ProjectCategory;
 
-    const mockTags = ["Gestion Client", "Convergence", "Other"];
-
-    const onSelectChange = (value: string, onChange: (value: string) => void) => {
-        setTagName("");
-        setShowTagInput(false);
-        onChange(value);
-    };
-
     const checkFile = (entry: DirEntry) => {
+        console.log(selectedTypeValue);
         switch (selectedTypeValue) {
             // Check if package json exist in the directory
             case ProjectCategoryValue.FRONTEND:
@@ -46,7 +35,7 @@ const ProjectCreationForm = () => {
                 }
                 break;
             case ProjectCategoryValue.API:
-                break;
+                return true;
         }
         return false;
     };
@@ -108,9 +97,7 @@ const ProjectCreationForm = () => {
                 control={control}
                 render={({ field, fieldState }) => (
                     <Field data-invalid={fieldState.invalid}>
-                        <FieldLabel htmlFor="category">
-                            {t("form.project.category.label")}
-                        </FieldLabel>
+                        <FieldLabel>{t("form.project.category.label")}</FieldLabel>
                         <Select
                             name={field.name}
                             value={field.value}
@@ -127,6 +114,9 @@ const ProjectCreationForm = () => {
                                 <SelectItem value={ProjectCategoryValue.PACKAGE}>
                                     Package
                                 </SelectItem>
+                                <SelectItem value={ProjectCategoryValue.OTHER}>
+                                    {t("form.project.category.other")}
+                                </SelectItem>
                             </SelectContent>
                             {fieldState.error && (
                                 <p className="text-destructive">{fieldState.error.message}</p>
@@ -141,7 +131,7 @@ const ProjectCreationForm = () => {
                 control={control}
                 render={({ field, fieldState }) => (
                     <Field data-invalid={fieldState.invalid}>
-                        <FieldLabel htmlFor="name">{t("form.project.name.label")}</FieldLabel>
+                        <FieldLabel>{t("form.project.name.label")}</FieldLabel>
                         <Input
                             {...field}
                             id="name"
@@ -159,9 +149,7 @@ const ProjectCreationForm = () => {
                 render={({ field, fieldState }) => (
                     <Field data-invalid={fieldState.invalid}>
                         <div className="flex flex-col gap-4">
-                            <FieldLabel htmlFor="path">
-                                {t("form.project.directory-path.label")}
-                            </FieldLabel>
+                            <FieldLabel>{t("form.project.directory-path.label")}</FieldLabel>
                             <FieldDescription>
                                 {selectedTypeValue === ProjectCategoryValue.API ? (
                                     <Trans
@@ -195,71 +183,8 @@ const ProjectCreationForm = () => {
                 control={control}
                 render={({ field, fieldState }) => (
                     <Field data-invalid={fieldState.invalid}>
-                        <FieldLabel htmlFor="tag">{t("form.project.tag.label")}</FieldLabel>
-                        <div className="flex gap-4">
-                            <Select
-                                name={field.name}
-                                value={field.value}
-                                onValueChange={(value) => onSelectChange(value, field.onChange)}
-                            >
-                                <SelectTrigger
-                                    id="tag"
-                                    className="w-full"
-                                    aria-invalid={fieldState.invalid}
-                                >
-                                    <SelectValue />
-                                </SelectTrigger>
-                                <SelectContent alignItemWithTrigger={false}>
-                                    <div className="max-h-32 overflow-y-auto">
-                                        {mockTags.map((tag) => (
-                                            <SelectItem key={tag} value={tag}>
-                                                {tag}
-                                            </SelectItem>
-                                        ))}
-                                    </div>
-                                    <SelectSeparator />
-                                    {showTagInput ? (
-                                        <div className="flex gap-2 p-3">
-                                            <Input
-                                                type="text"
-                                                placeholder={t("form.project.tag.placeholder")}
-                                                className="w-1/2"
-                                                maxLength={20}
-                                                value={tagName}
-                                                onClick={(e) => e.stopPropagation()}
-                                                onKeyDown={(e) => e.stopPropagation()}
-                                                onChange={(event) => {
-                                                    setTagName(event.target.value);
-                                                }}
-                                            />
-                                            <Button
-                                                onClick={() => {
-                                                    console.log("TODO SAVE Tag name : " + tagName);
-
-                                                    setShowTagInput(false);
-                                                }}
-                                            >
-                                                {t("shared.confirm")}
-                                            </Button>
-                                            <Button
-                                                variant="outline"
-                                                onClick={() => setShowTagInput(!showTagInput)}
-                                            >
-                                                {t("shared.cancel")}
-                                            </Button>
-                                        </div>
-                                    ) : (
-                                        <Button
-                                            variant="ghost"
-                                            className="w-full justify-start rounded-none"
-                                            onClick={() => setShowTagInput(!showTagInput)}
-                                        >
-                                            {t("form.project.tag.creation")}
-                                        </Button>
-                                    )}
-                                </SelectContent>
-                            </Select>
-                        </div>
+                        <FieldLabel>{t("form.project.tag.label")}</FieldLabel>
+                        <TagField field={field} fieldState={fieldState} />
                     </Field>
                 )}
             />
@@ -270,9 +195,7 @@ const ProjectCreationForm = () => {
                     control={control}
                     render={({ field, fieldState }) => (
                         <Field data-invalid={fieldState.invalid}>
-                            <FieldLabel htmlFor="urlEndpoint">
-                                {t("form.project.url-endpoint.label")}
-                            </FieldLabel>
+                            <FieldLabel>{t("form.project.url-endpoint.label")}</FieldLabel>
                             <FieldDescription>
                                 {t("form.project.url-endpoint.desc")}
                             </FieldDescription>

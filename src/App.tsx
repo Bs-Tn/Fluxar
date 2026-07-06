@@ -1,18 +1,43 @@
+import { createContext, useState } from "react";
 import "./App.css";
 import { Dashboard } from "./components/functionnal/dashboard";
 import { Header } from "./components/functionnal/layout/header";
 import { Sidebar } from "./components/functionnal/layout/sidebar";
+import { RootContextType } from "./types/context";
+import { useDatabase } from "./hooks/useDatabase";
+import { ProjectCategory } from "./types/common";
+
+export const RootContext = createContext<RootContextType>({
+    projectDocuments: [],
+    tagDocuments: [],
+    selectedProjectCategory: ProjectCategory.ALL,
+    setSelectedProjectCategory: () => {},
+});
 
 function App() {
+    const { projects, tags } = useDatabase();
+    const [selectedProjectCategory, setSelectedProjectCategory] = useState<string>(
+        ProjectCategory.ALL
+    );
+
     return (
-        <div className="flex flex-col h-screen">
-            <Header />
-            <div className="flex w-full h-full">
-                <Sidebar />
-                <main className="w-full bg-background ">
-                    <Dashboard />
-                </main>
-            </div>
+        <div className="flex flex-col gap-6 h-screen">
+            <RootContext.Provider
+                value={{
+                    projectDocuments: projects,
+                    tagDocuments: tags,
+                    selectedProjectCategory,
+                    setSelectedProjectCategory,
+                }}
+            >
+                <Header />
+                <div className="flex w-full h-full">
+                    <Sidebar />
+                    <main className="w-full bg-background p-6">
+                        <Dashboard />
+                    </main>
+                </div>
+            </RootContext.Provider>
         </div>
     );
 }
