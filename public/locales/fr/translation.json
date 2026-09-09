@@ -64,7 +64,8 @@
         "settings": "Paramètres",
         "browse": "Parcourir",
         "reset": "Réinitialiser",
-        "project": "projet",
+        "project_one": "Projet",
+        "project_other": "Projets",
         "online": "En ligne",
         "offline": "Hors ligne",
         "categories": {

@@ -1,11 +1,11 @@
 import { createContext, useState } from "react";
 import "./App.css";
-import { Dashboard } from "./components/functionnal/dashboard";
-import { Header } from "./components/functionnal/layout/header";
-import { Sidebar } from "./components/functionnal/layout/sidebar";
-import { RootContextType } from "./types/context";
-import { useDatabase } from "./hooks/useDatabase";
-import { ProjectCategory } from "./types/common";
+import { Header } from "./core/layout/header";
+import { Sidebar } from "./core/layout/sidebar";
+import { RootContextType } from "./shared/types/context";
+import { useDatabase } from "./core/database/hooks/use-database";
+import { ProjectCategory } from "./shared/types/common";
+import { Dashboard } from "./features/dashboard/dashboard";
 
 export const RootContext = createContext<RootContextType>({
     projectDocuments: [],
