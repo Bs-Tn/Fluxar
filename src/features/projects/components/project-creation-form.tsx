@@ -24,7 +24,6 @@ const ProjectCreationForm = () => {
     const selectedTypeValue = watch("category") as ProjectCategory;
 
     const checkFile = (entry: DirEntry) => {
-        console.log(selectedTypeValue);
         switch (selectedTypeValue) {
             // Check if package json exist in the directory
             case ProjectCategoryValue.FRONTEND:
