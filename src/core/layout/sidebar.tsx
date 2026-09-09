@@ -1,13 +1,13 @@
 import { Fragment, JSX, useState } from "react";
 import ProjectCarousel from "@/shared/components/ui/carousel/carousel";
 import { EmblaOptionsType } from "embla-carousel";
-import { Package, Monitor, PlugZap, Plus, LayoutGrid, Settings, Layers } from "lucide-react";
+import { Package, Monitor, PlugZap, Plus, LayoutGrid, SlidersVertical, Layers } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
 import { useTranslation } from "react-i18next";
 import { ProjectCreationDialog } from "../../features/projects/components/project-creation-dialog";
 import { ProjectCategory } from "@/shared/types/common";
 import { t } from "i18next";
-import { SettingsDialog } from "../../features/settings/components/settings-dialog";
+import { SettingsMenu } from "../../features/settings/components/settings-menu";
 
 export type SlideType = {
     path: string;
@@ -34,7 +34,7 @@ const Sidebar = () => {
         <Fragment>
             {/* DIALOG */}
             <ProjectCreationDialog open={openProjectCreation} onOpen={setOpenProjectCreation} />
-            <SettingsDialog open={openSettings} onOpen={setOpenSettings} />
+            <SettingsMenu open={openSettings} onOpen={setOpenSettings} />
             {/* ========================= */}
 
             <div className="flex flex-col pb-6">
@@ -57,7 +57,7 @@ const Sidebar = () => {
                     onClick={() => setOpenSettings(true)}
                     className="flex gap-2 items-center justify-center mx-auto font-bold hover:text-primary cursor-pointer"
                 >
-                    <Settings width={30} height={30} />
+                    <SlidersVertical width={30} height={30} />
                     <p>{t("shared.settings")}</p>
                 </div>
             </div>

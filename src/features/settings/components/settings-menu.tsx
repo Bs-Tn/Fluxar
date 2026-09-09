@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { SettingsDialogProps } from "../types";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/shared/components/ui/dialog";
 
-const SettingsDialog = ({ open, onOpen }: SettingsDialogProps) => {
+const SettingsMenu = ({ open, onOpen }: SettingsDialogProps) => {
     const { t } = useTranslation();
 
     return (
@@ -27,4 +27,4 @@ const SettingsDialog = ({ open, onOpen }: SettingsDialogProps) => {
     );
 };
 
-export { SettingsDialog };
+export { SettingsMenu };
