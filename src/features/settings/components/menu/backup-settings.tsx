@@ -1,10 +1,8 @@
+import { useTranslation } from "react-i18next";
+
 const BackupSettings = () => {
-    return (
-        <div>
-            Choisissez un dossier local pour sauvegarder automatiquement une copie de vos données.
-            Cela vous permet de restaurer vos informations en cas de problème avec l'application.
-        </div>
-    );
+    const { t } = useTranslation();
+    return <div> {t("features.settings.backup.desc")}</div>;
 };
 
 export default BackupSettings;

@@ -97,21 +97,22 @@ const Menu = ({
 };
 
 const SettingsMenu = ({ open, onOpen }: SettingsDialogProps) => {
+    const { t } = useTranslation();
     const [menuItems, setMenuItems] = useState<MenuSectionProps[]>([
         {
-            title: "General",
+            title: t("features.settings.general.title"),
             icon: SquareTerminal,
             isActive: true,
             items: [
                 {
                     id: "general.backup",
-                    title: "Sauvegarde",
+                    title: t("features.settings.backup.title"),
                     isActive: true,
                     component: lazy(() => import("./menu/backup-settings")),
                 },
                 {
                     id: "general.language",
-                    title: "Langue",
+                    title: t("features.settings.language.title"),
                     isActive: false,
                     component: lazy(() => import("./menu/language-settings")),
                 },

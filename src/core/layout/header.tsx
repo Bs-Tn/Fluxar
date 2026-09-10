@@ -8,9 +8,9 @@ const Header = () => {
         <header className="flex flex-col gap-4 bg-background">
             <div className="w-full flex justify-between items-center px-8 pt-4 pb-2">
                 <div className="flex flex-col">
-                    <TypographyH1>{t("layout.header.title")}</TypographyH1>
+                    <TypographyH1>{t("core.layout.header.title")}</TypographyH1>
                     <p className="text-sm font-bold italic text-primary">
-                        {t("layout.header.desc")}
+                        {t("core.layout.header.desc")}
                     </p>
                 </div>
             </div>

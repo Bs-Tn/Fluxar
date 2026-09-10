@@ -45,7 +45,7 @@ const Sidebar = () => {
                         onClick={() => setOpenProjectCreation(true)}
                     >
                         <Plus className="font-bold" />
-                        {t("layout.sidebar.new-project")}
+                        {t("core.layout.sidebar.new-project")}
                     </Button>
                     <ProjectCarousel
                         className="h-3/4 items-center"

@@ -61,10 +61,12 @@ const ProjectCreationDialog: FC<Props> = ({ open, onOpen }) => {
             <DialogContent className="flex flex-col gap-3 min-w-1/3 px-12 py-8">
                 <DialogHeader className="flex flex-col gap-3">
                     <DialogTitle className="text-center text-2xl font-extrabold">
-                        {t("form.project.title")}
+                        {t("features.projects.form.project.title")}
                     </DialogTitle>
                     <Separator className="mx-4" />
-                    <DialogDescription>{t("form.project.info")}</DialogDescription>
+                    <DialogDescription>
+                        {t("features.projects.form.project.info")}
+                    </DialogDescription>
                 </DialogHeader>
                 <FormProvider {...methods}>
                     <form

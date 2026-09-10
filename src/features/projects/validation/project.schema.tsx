@@ -14,14 +14,14 @@ export const projectSchema = z.object({
         .min(3, {
             error: (issue) => {
                 if (issue.code === "too_small") {
-                    return i18n.t("form.project.error.name.length");
+                    return i18n.t("features.projects.form.project.error.name.length");
                 }
             },
         })
         .max(30, {
             error: (issue) => {
                 if (issue.code === "too_big") {
-                    return i18n.t("form.project.error.name.length");
+                    return i18n.t("features.projects.form.project.error.name.length");
                 }
             },
         }),
