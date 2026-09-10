@@ -34,7 +34,7 @@ const Sidebar = () => {
         <Fragment>
             {/* DIALOG */}
             <ProjectCreationDialog open={openProjectCreation} onOpen={setOpenProjectCreation} />
-            <SettingsMenu open={openSettings} onOpen={setOpenSettings} />
+            {openSettings && <SettingsMenu open={openSettings} onOpen={setOpenSettings} />}
             {/* ========================= */}
 
             <div className="flex flex-col pb-6">
