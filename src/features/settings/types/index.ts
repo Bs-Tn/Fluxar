@@ -5,16 +5,16 @@ export type SettingsDialogProps = {
     onOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-export type MenuItemsProps = {
+export type MenuItems = {
     id: string;
     title: string;
     isActive: boolean;
     component: React.LazyExoticComponent<React.ComponentType<any>>;
 };
 
-export type MenuSectionProps = {
+export type MenuOptions = {
     title: string;
     icon?: React.ElementType;
     isActive: boolean;
-    items: Array<MenuItemsProps>;
+    items: Array<MenuItems>;
 };

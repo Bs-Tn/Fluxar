@@ -75,7 +75,8 @@
                 "title": "Langue",
                 "desc": "Choisissez la langue d'affichage de l'application.",
                 "name": {
-                    "fr": "Français"
+                    "fr": "Français",
+                    "en-GB": "Anglais"
                 }
             }
         }

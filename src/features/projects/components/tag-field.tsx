@@ -26,7 +26,9 @@ type Props = {
 
 const TagField = ({ field, fieldState }: Props) => {
     const { t } = useTranslation();
-    const { tagDocuments } = useContext<RootContextType>(RootContext);
+    const {
+        documents: { tagDocuments },
+    } = useContext<RootContextType>(RootContext);
 
     const formatTags: Tag[] = tagDocuments.map((td) => ({ name: td.name, color: td.color }));
 

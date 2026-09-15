@@ -14,8 +14,12 @@ const createOrUpdateDoc = async (project: Project) => {
     return await database.put(newProject);
 };
 
-const getAllDoc = async () =>
-    (await database.find({ selector: { type: "project" } })).docs as ProjectDocument[];
+const getAllDoc = async (): Promise<ProjectDocument[]> => {
+    const result = await database.find({
+        selector: { type: "project" },
+    });
+    return result.docs as ProjectDocument[];
+};
 
 const deleteDoc = async (id: string) => {
     try {
@@ -27,7 +31,7 @@ const deleteDoc = async (id: string) => {
 };
 
 export const projectService = {
-    createOrUpdateDoc: createOrUpdateDoc,
+    createOrUpdateDoc,
     getAllDoc,
     deleteDoc,
 };

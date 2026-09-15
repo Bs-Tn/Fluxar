@@ -1,9 +1,8 @@
 import { Dispatch, SetStateAction } from "react";
-import { ProjectDocument, TagDocument } from "./database";
+import { Documents } from "./common";
 
 export type RootContextType = {
-    projectDocuments: ProjectDocument[];
-    tagDocuments: TagDocument[];
+    documents: Documents;
     selectedProjectCategory: string;
     setSelectedProjectCategory: Dispatch<SetStateAction<string>>;
 };

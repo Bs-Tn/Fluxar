@@ -1,0 +1,102 @@
+{
+    "core": {
+        "layout": {
+            "header": {
+                "title": "Dashboard",
+                "desc": "Project Monitoring"
+            },
+            "sidebar": {
+                "new-project": "New project",
+                "dialog": {
+                    "title": "Create a new project",
+                    "form": {
+                        "project": {
+                            "name": "Project name"
+                        },
+                        "tag": {
+                            "name": "Tag"
+                        },
+                        "endpoint-name": "Endpoint name"
+                    }
+                }
+            }
+        }
+    },
+    "features": {
+        "dashboard": {},
+        "projects": {
+            "form": {
+                "project": {
+                    "title": "Create a new project",
+                    "info": "Add one of your projects so you can include it in monitoring and access it faster.",
+                    "category": {
+                        "label": "Category",
+                        "other": "Other"
+                    },
+                    "name": {
+                        "label": "Name"
+                    },
+                    "tag": {
+                        "label": "Tag",
+                        "creation": "Tag creation",
+                        "placeholder": "Tag name"
+                    },
+                    "directory-path": {
+                        "label": "Select project folder",
+                        "desc-api": "Please select the folder containing the solution file <bold>.sln</bold>",
+                        "desc-other": "Please select the folder containing the <bold>package.json</bold> file"
+                    },
+                    "url-endpoint": {
+                        "label": "API test endpoint",
+                        "desc": "Enter the URL that the application should call to ensure your API is responding correctly.",
+                        "placeholder": "Enter ping URL..."
+                    },
+                    "error": {
+                        "name": {
+                            "required": "Project name is required",
+                            "invalid": "Name is invalid",
+                            "length": "Name must be between 3 and 30 characters"
+                        },
+                        "url-endpoint": "URL must start with http:// or https://"
+                    }
+                }
+            }
+        },
+        "settings": {
+            "general": {
+                "title": "General"
+            },
+            "backup": {
+                "title": "Backup",
+                "desc": "Choose a local folder to automatically save a copy of your data. This allows you to restore your information if an issue occurs with the application."
+            },
+            "language": {
+                "title": "Language",
+                "desc": "Choose the display language for the application.",
+                "name": {
+                    "fr": "French",
+                    "en-GB": "English"
+                }
+            }
+        }
+    },
+    "shared": {
+        "confirm": "Confirm",
+        "close": "Close",
+        "cancel": "Cancel",
+        "settings": "Settings",
+        "browse": "Browse",
+        "reset": "Reset",
+        "project_one": "Project",
+        "project_other": "Projects",
+        "online": "Online",
+        "offline": "Offline",
+        "categories": {
+            "all": "All projects",
+            "frontend": "Frontend",
+            "api": "Api",
+            "package": "Package",
+            "other": "Others"
+        }
+    }
+}

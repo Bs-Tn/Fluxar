@@ -17,7 +17,10 @@ export type PathProjectType = keyof typeof PATH_PROJECT;
 
 const Dashboard = () => {
     const { t } = useTranslation();
-    const { projectDocuments, selectedProjectCategory } = useContext<RootContextType>(RootContext);
+    const {
+        documents: { projectDocuments },
+        selectedProjectCategory,
+    } = useContext<RootContextType>(RootContext);
 
     const [projectCategory, setProjectCategory] = useState<string | undefined>(undefined);
 
@@ -56,6 +59,8 @@ const Dashboard = () => {
             filteredProject();
         }
     }, [projectDocuments, selectedProjectCategory]);
+
+    if (!selectedProjectList) return;
 
     return (
         <>

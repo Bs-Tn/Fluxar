@@ -8,6 +8,8 @@ type Props = {
 };
 
 const ProjectSection = ({ projectCategory, projects }: Props) => {
+    if (!projects || projects.length === 0) return;
+
     return (
         <section className="flex flex-col gap-4">
             <TypographyH2>{projectCategory}</TypographyH2>

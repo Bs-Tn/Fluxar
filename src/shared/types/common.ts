@@ -1,4 +1,4 @@
-import { ProjectDocument, TagDocument } from "./database";
+import { ProjectDocument, SettingDocument, TagDocument } from "./database";
 
 export const ProjectCategory = {
     ALL: "all",
@@ -11,4 +11,5 @@ export const ProjectCategory = {
 export type Documents = {
     projectDocuments: ProjectDocument[];
     tagDocuments: TagDocument[];
+    settingDocuments: SettingDocument[];
 };

@@ -8,14 +8,17 @@ import { ProjectCategory } from "./shared/types/common";
 import { Dashboard } from "./features/dashboard/dashboard";
 
 export const RootContext = createContext<RootContextType>({
-    projectDocuments: [],
-    tagDocuments: [],
+    documents: {
+        projectDocuments: [],
+        tagDocuments: [],
+        settingDocuments: [],
+    },
     selectedProjectCategory: ProjectCategory.ALL,
     setSelectedProjectCategory: () => {},
 });
 
 function App() {
-    const { projects, tags } = useDatabase();
+    const { projects, tags, settings } = useDatabase();
     const [selectedProjectCategory, setSelectedProjectCategory] = useState<string>(
         ProjectCategory.ALL
     );
@@ -24,8 +27,11 @@ function App() {
         <div className="flex flex-col gap-6 h-screen">
             <RootContext.Provider
                 value={{
-                    projectDocuments: projects,
-                    tagDocuments: tags,
+                    documents: {
+                        projectDocuments: projects,
+                        tagDocuments: tags,
+                        settingDocuments: settings,
+                    },
                     selectedProjectCategory,
                     setSelectedProjectCategory,
                 }}

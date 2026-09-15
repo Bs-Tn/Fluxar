@@ -14,8 +14,12 @@ const createOrUpdateDoc = async (tag: Tag) => {
     return await database.put(newTag);
 };
 
-const getAllDoc = async () =>
-    (await database.find({ selector: { type: "tag" } })).docs as TagDocument[];
+const getAllDoc = async (): Promise<TagDocument[]> => {
+    const result = await database.find({
+        selector: { type: "tag" },
+    });
+    return result.docs as TagDocument[];
+};
 
 const deleteDoc = async (id: string) => {
     try {

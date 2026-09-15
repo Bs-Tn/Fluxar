@@ -1,6 +1,15 @@
-import { Dispatch, JSX, lazy, SetStateAction, Suspense, useState } from "react";
+import {
+    Dispatch,
+    JSX,
+    lazy,
+    SetStateAction,
+    Suspense,
+    useContext,
+    useEffect,
+    useState,
+} from "react";
 import { useTranslation } from "react-i18next";
-import { MenuItemsProps, MenuSectionProps, SettingsDialogProps } from "../types";
+import { MenuItems, MenuOptions, SettingsDialogProps } from "../types";
 import { Dialog, DialogContent } from "@/shared/components/ui/dialog";
 import {
     Sidebar,
@@ -21,18 +30,21 @@ import {
     CollapsibleTrigger,
 } from "@/shared/components/ui/collapsible";
 import { cn } from "@/shared/lib/utils";
+import { RootContext } from "@/App";
+import { RootContextType } from "@/shared/types/context";
+import i18n from "@/core/i18n";
 
 const Menu = ({
     sections,
     onItemsChange,
 }: {
-    sections: MenuSectionProps[];
-    onItemsChange: Dispatch<SetStateAction<MenuSectionProps[]>>;
+    sections: MenuOptions[];
+    onItemsChange: Dispatch<SetStateAction<MenuOptions[]>>;
 }): JSX.Element => {
     const { t } = useTranslation();
 
     // Determines which element is active or not
-    const updatedMenuItemStatus = (items: MenuItemsProps[], itemId: string) =>
+    const updatedMenuItemStatus = (items: MenuItems[], itemId: string) =>
         items.map((item) => ({ ...item, isActive: item.id === itemId }));
 
     // Update the menu items
@@ -72,7 +84,7 @@ const Menu = ({
                             </CollapsibleTrigger>
                             <CollapsibleContent>
                                 <SidebarMenuSub>
-                                    {section.items?.map((item: MenuItemsProps) => (
+                                    {section.items?.map((item: MenuItems) => (
                                         <SidebarMenuSubItem key={item.title}>
                                             <SidebarMenuSubButton
                                                 className={cn(
@@ -98,8 +110,11 @@ const Menu = ({
 
 const SettingsMenu = ({ open, onOpen }: SettingsDialogProps) => {
     const { t } = useTranslation();
+    const {
+        documents: { settingDocuments },
+    } = useContext<RootContextType>(RootContext);
 
-    const [menuSections, setMenuSections] = useState<MenuSectionProps[]>([
+    const menuOptionDefaultValue = [
         {
             title: t("features.settings.general.title"),
             icon: SquareTerminal,
@@ -119,10 +134,17 @@ const SettingsMenu = ({ open, onOpen }: SettingsDialogProps) => {
                 },
             ],
         },
-    ]);
+    ];
+
+    const [menuOption, setMenuOptions] = useState<MenuOptions[]>(menuOptionDefaultValue);
+
+    // Set up menu configuration each time the language change
+    useEffect(() => {
+        setMenuOptions(menuOptionDefaultValue);
+    }, [i18n.language]);
 
     // Dynamically display the active component
-    const SelectedComponent = menuSections
+    const SelectedComponent = menuOption
         .flatMap((section) => section.items ?? [])
         .find((item) => item.isActive)?.component;
 
@@ -131,11 +153,15 @@ const SettingsMenu = ({ open, onOpen }: SettingsDialogProps) => {
             <DialogContent className="min-w-3/4 h-[80vh] flex flex-col gap-3">
                 <SidebarProvider className="h-full min-h-0 w-full flex">
                     <Sidebar collapsible="none" className="w-64 shrink-0 h-full bg-white border-r">
-                        <Menu sections={menuSections} onItemsChange={setMenuSections} />
+                        <Menu sections={menuOption} onItemsChange={setMenuOptions} />
                     </Sidebar>
                     <div className="flex-1 min-w-0 h-full overflow-y-auto p-6">
                         <Suspense fallback={<p>Chargement...</p>}>
-                            <div className="p-6">{SelectedComponent && <SelectedComponent />}</div>
+                            <div className="p-6">
+                                {SelectedComponent && (
+                                    <SelectedComponent settings={settingDocuments} />
+                                )}
+                            </div>
                         </Suspense>
                     </div>
                 </SidebarProvider>
