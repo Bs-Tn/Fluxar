@@ -11,7 +11,10 @@
             "allow": [{ "path": "**", "app": true }]
         },
         "dialog:default",
+        "dialog:allow-save",
+        "fs:scope",
         "fs:allow-read-dir",
-        "fs:allow-read"
+        "fs:allow-read",
+        "fs:allow-write-text-file"
     ]
 }

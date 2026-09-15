@@ -3,7 +3,7 @@ import { Tag, TagDocument } from "@/shared/types/database";
 import { PouchTagDb } from "./types";
 import { database } from "./instance";
 
-const createDoc = async (tag: Tag) => {
+const createOrUpdateDoc = async (tag: Tag) => {
     const newTag: PouchTagDb = {
         _id: generateRandomID(),
         type: "tag",
@@ -27,7 +27,7 @@ const deleteDoc = async (id: string) => {
 };
 
 export const tagService = {
-    createDoc,
+    createOrUpdateDoc,
     getAllDoc,
     deleteDoc,
 };

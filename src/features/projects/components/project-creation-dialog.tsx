@@ -47,7 +47,7 @@ const ProjectCreationDialog: FC<Props> = ({ open, onOpen }) => {
                 urlEndpoint: data.urlEndpoint ?? undefined,
             };
 
-            await projectService.createDoc(newProject);
+            await projectService.createOrUpdateDoc(newProject);
 
             onOpen(!open);
             methods.reset();

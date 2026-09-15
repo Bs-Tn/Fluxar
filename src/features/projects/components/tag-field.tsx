@@ -50,7 +50,7 @@ const TagField = ({ field, fieldState }: Props) => {
         try {
             const tagColor = generateRandomHexColor();
 
-            await tagService.createDoc({
+            await tagService.createOrUpdateDoc({
                 name: tagName,
                 color: tagColor,
             });

@@ -73,11 +73,13 @@
             },
             "language": {
                 "title": "Langue",
-                "desc": ""
+                "desc": "Choisissez la langue d'affichage de l'application.",
+                "name": {
+                    "fr": "Français"
+                }
             }
         }
     },
-
     "shared": {
         "confirm": "Confirmer",
         "close": "Fermer",

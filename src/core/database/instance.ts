@@ -1,5 +1,6 @@
 import PouchDB from "pouchdb";
 import PouchFind from "pouchdb-find";
+import { PouchBackupDb } from "./types";
 
 PouchDB.plugin(PouchFind);
 
@@ -19,4 +20,17 @@ const realTimeChanges = (callback: () => void) =>
         })
         .on("change", () => callback());
 
-export { database, realTimeChanges };
+const getBackupData = async (): Promise<PouchBackupDb> => {
+    const resultDbData = await database.allDocs({
+        include_docs: true,
+        attachments: true, // inclure les pièces jointes si besoin
+    });
+
+    return {
+        db_name: database.name,
+        exported_at: new Date().toISOString(),
+        docs: resultDbData.rows.map((row) => row.doc),
+    };
+};
+
+export { database, getBackupData, realTimeChanges };

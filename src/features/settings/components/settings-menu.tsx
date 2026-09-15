@@ -98,7 +98,8 @@ const Menu = ({
 
 const SettingsMenu = ({ open, onOpen }: SettingsDialogProps) => {
     const { t } = useTranslation();
-    const [menuItems, setMenuItems] = useState<MenuSectionProps[]>([
+
+    const [menuSections, setMenuSections] = useState<MenuSectionProps[]>([
         {
             title: t("features.settings.general.title"),
             icon: SquareTerminal,
@@ -120,7 +121,8 @@ const SettingsMenu = ({ open, onOpen }: SettingsDialogProps) => {
         },
     ]);
 
-    const SelectedComponent = menuItems
+    // Dynamically display the active component
+    const SelectedComponent = menuSections
         .flatMap((section) => section.items ?? [])
         .find((item) => item.isActive)?.component;
 
@@ -129,11 +131,11 @@ const SettingsMenu = ({ open, onOpen }: SettingsDialogProps) => {
             <DialogContent className="min-w-3/4 h-[80vh] flex flex-col gap-3">
                 <SidebarProvider className="h-full min-h-0 w-full flex">
                     <Sidebar collapsible="none" className="w-64 shrink-0 h-full bg-white border-r">
-                        <Menu sections={menuItems} onItemsChange={setMenuItems} />
+                        <Menu sections={menuSections} onItemsChange={setMenuSections} />
                     </Sidebar>
                     <div className="flex-1 min-w-0 h-full overflow-y-auto p-6">
                         <Suspense fallback={<p>Chargement...</p>}>
-                            {SelectedComponent && <SelectedComponent />}
+                            <div className="p-6">{SelectedComponent && <SelectedComponent />}</div>
                         </Suspense>
                     </div>
                 </SidebarProvider>

@@ -1,12 +1,12 @@
 import { generateRandomID, getCurrentDate } from "@/shared/lib";
 import { database } from "./instance";
-import { Project, ProjectDocument } from "@/shared/types/database";
-import { PouchProjectDb } from "./types";
+import { ProjectDocument } from "@/shared/types/database";
+import { PouchSettingsDb } from "./types";
 
-const createOrUpdateDoc = async (project: Project) => {
-    const newProject: PouchProjectDb = {
+const createOrUpdateDoc = async (project: T) => {
+    const newProject: PouchSettingsDb<T> = {
         _id: generateRandomID(),
-        type: "project",
+        type: "settings",
         createdAt: getCurrentDate(),
         modifiedAt: getCurrentDate(),
         ...project,
@@ -15,7 +15,7 @@ const createOrUpdateDoc = async (project: Project) => {
 };
 
 const getAllDoc = async () =>
-    (await database.find({ selector: { type: "project" } })).docs as ProjectDocument[];
+    (await database.find({ selector: { type: "settings" } })).docs as ProjectDocument[];
 
 const deleteDoc = async (id: string) => {
     try {

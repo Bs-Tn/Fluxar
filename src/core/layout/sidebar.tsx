@@ -53,13 +53,14 @@ const Sidebar = () => {
                         options={OPTIONS}
                     />
                 </nav>
-                <div
+                <Button
+                    className="flex gap-2 items-center justify-center mx-auto font-bold hover:text-primary hover:bg-transparent"
+                    variant="ghost"
                     onClick={() => setOpenSettings(true)}
-                    className="flex gap-2 items-center justify-center mx-auto font-bold hover:text-primary cursor-pointer"
                 >
                     <SlidersVertical width={30} height={30} />
                     <p>{t("shared.settings")}</p>
-                </div>
+                </Button>
             </div>
         </Fragment>
     );
