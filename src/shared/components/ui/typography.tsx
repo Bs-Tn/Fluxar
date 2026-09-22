@@ -29,7 +29,7 @@ const TypographyH3: FC<PropsWithChildren & ComponentProps<"h3">> = ({
     ...props
 }) => {
     return (
-        <h2
+        <h3
             className={cn(
                 "scroll-m-20 pb-2 text-2xl font-semibold tracking-tight first:mt-0",
                 className
@@ -37,8 +37,20 @@ const TypographyH3: FC<PropsWithChildren & ComponentProps<"h3">> = ({
             {...props}
         >
             {children}
-        </h2>
+        </h3>
     );
 };
 
-export { TypographyH1, TypographyH2, TypographyH3 };
+const TypographyDescription: FC<PropsWithChildren & ComponentProps<"p">> = ({
+    children,
+    className,
+    ...props
+}) => {
+    return (
+        <p className={cn("scroll-m-20 text-sm  tracking-tight first:mt-0", className)} {...props}>
+            {children}
+        </p>
+    );
+};
+
+export { TypographyH1, TypographyH2, TypographyH3, TypographyDescription };

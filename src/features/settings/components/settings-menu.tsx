@@ -121,22 +121,22 @@ const SettingsMenu = ({ open, onOpen }: SettingsDialogProps) => {
             isActive: true,
             items: [
                 {
-                    id: "general.backup",
-                    title: t("features.settings.backup.title"),
+                    id: "general.data",
+                    title: t("features.settings.data.title"),
                     isActive: true,
-                    component: lazy(() => import("./menu/backup-settings")),
+                    component: lazy(() => import("./menu/general/data/data-settings")),
                 },
                 {
                     id: "general.language",
                     title: t("features.settings.language.title"),
                     isActive: false,
-                    component: lazy(() => import("./menu/language-settings")),
+                    component: lazy(() => import("./menu/general/language-settings")),
                 },
             ],
         },
     ];
 
-    const [menuOption, setMenuOptions] = useState<MenuOptions[]>(menuOptionDefaultValue);
+    const [menuOptions, setMenuOptions] = useState<MenuOptions[]>(menuOptionDefaultValue);
 
     // Set up menu configuration each time the language change
     useEffect(() => {
@@ -144,7 +144,7 @@ const SettingsMenu = ({ open, onOpen }: SettingsDialogProps) => {
     }, [i18n.language]);
 
     // Dynamically display the active component
-    const SelectedComponent = menuOption
+    const SelectedComponent = menuOptions
         .flatMap((section) => section.items ?? [])
         .find((item) => item.isActive)?.component;
 
@@ -153,15 +153,11 @@ const SettingsMenu = ({ open, onOpen }: SettingsDialogProps) => {
             <DialogContent className="min-w-3/4 h-[80vh] flex flex-col gap-3">
                 <SidebarProvider className="h-full min-h-0 w-full flex">
                     <Sidebar collapsible="none" className="w-64 shrink-0 h-full bg-white border-r">
-                        <Menu sections={menuOption} onItemsChange={setMenuOptions} />
+                        <Menu sections={menuOptions} onItemsChange={setMenuOptions} />
                     </Sidebar>
                     <div className="flex-1 min-w-0 h-full overflow-y-auto p-6">
                         <Suspense fallback={<p>Chargement...</p>}>
-                            <div className="p-6">
-                                {SelectedComponent && (
-                                    <SelectedComponent settings={settingDocuments} />
-                                )}
-                            </div>
+                            {SelectedComponent && <SelectedComponent settings={settingDocuments} />}
                         </Suspense>
                     </div>
                 </SidebarProvider>

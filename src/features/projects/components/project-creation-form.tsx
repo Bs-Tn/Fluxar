@@ -34,7 +34,10 @@ const ProjectCreationForm = () => {
                 }
                 break;
             case ProjectCategoryValue.API:
-                return true;
+                setValue("directoryPath", entry.name);
+                if (entry.name.includes(".slnx")) {
+                    return true;
+                }
         }
         return false;
     };
@@ -96,9 +99,7 @@ const ProjectCreationForm = () => {
                 control={control}
                 render={({ field, fieldState }) => (
                     <Field data-invalid={fieldState.invalid}>
-                        <FieldLabel>
-                            {t("features.projects.form.project.category.label")}
-                        </FieldLabel>
+                        <FieldLabel>{t("features.projects.form.category.label")}</FieldLabel>
                         <Select
                             name={field.name}
                             value={field.value}
@@ -116,7 +117,7 @@ const ProjectCreationForm = () => {
                                     Package
                                 </SelectItem>
                                 <SelectItem value={ProjectCategoryValue.OTHER}>
-                                    {t("features.projects.form.project.category.other")}
+                                    {t("features.projects.form.category.other")}
                                 </SelectItem>
                             </SelectContent>
                             {fieldState.error && (
@@ -132,7 +133,7 @@ const ProjectCreationForm = () => {
                 control={control}
                 render={({ field, fieldState }) => (
                     <Field data-invalid={fieldState.invalid}>
-                        <FieldLabel>{t("features.projects.form.project.name.label")}</FieldLabel>
+                        <FieldLabel>{t("features.projects.form.name.label")}</FieldLabel>
                         <Input
                             {...field}
                             id="name"
@@ -151,17 +152,17 @@ const ProjectCreationForm = () => {
                     <Field data-invalid={fieldState.invalid}>
                         <div className="flex flex-col gap-4">
                             <FieldLabel>
-                                {t("features.projects.form.project.directory-path.label")}
+                                {t("features.projects.form.directory-path.label")}
                             </FieldLabel>
                             <FieldDescription>
                                 {selectedTypeValue === ProjectCategoryValue.API ? (
                                     <Trans
-                                        i18nKey="features.projects.form.project.directory-path.desc-api"
+                                        i18nKey="features.projects.form.directory-path.desc-api"
                                         components={{ bold: <strong /> }}
                                     />
                                 ) : (
                                     <Trans
-                                        i18nKey="features.projects.form.project.directory-path.desc-other"
+                                        i18nKey="features.projects.form.directory-path.desc-other"
                                         components={{ bold: <strong /> }}
                                     />
                                 )}
@@ -186,7 +187,7 @@ const ProjectCreationForm = () => {
                 control={control}
                 render={({ field, fieldState }) => (
                     <Field data-invalid={fieldState.invalid}>
-                        <FieldLabel>{t("features.projects.form.project.tag.label")}</FieldLabel>
+                        <FieldLabel>{t("features.projects.form.tag.label")}</FieldLabel>
                         <TagField field={field} fieldState={fieldState} />
                     </Field>
                 )}
@@ -199,17 +200,15 @@ const ProjectCreationForm = () => {
                     render={({ field, fieldState }) => (
                         <Field data-invalid={fieldState.invalid}>
                             <FieldLabel>
-                                {t("features.projects.form.project.url-endpoint.label")}
+                                {t("features.projects.form.url-endpoint.label")}
                             </FieldLabel>
                             <FieldDescription>
-                                {t("features.projects.form.project.url-endpoint.desc")}
+                                {t("features.projects.form.url-endpoint.desc")}
                             </FieldDescription>
                             <Input
                                 {...field}
                                 id="urlEndpoint"
-                                placeholder={t(
-                                    "features.projects.form.project.url-endpoint.placeholder"
-                                )}
+                                placeholder={t("features.projects.form.url-endpoint.placeholder")}
                                 aria-invalid={fieldState.invalid}
                                 autoComplete="off"
                             />

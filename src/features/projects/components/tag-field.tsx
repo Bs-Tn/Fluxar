@@ -102,7 +102,7 @@ const TagField = ({ field, fieldState }: Props) => {
                     <div className="flex gap-2 p-3">
                         <Input
                             type="text"
-                            placeholder={t("features.projects.form.project.tag.placeholder")}
+                            placeholder={t("features.projects.form.tag.placeholder")}
                             className="w-1/2"
                             maxLength={20}
                             value={tagName}
@@ -123,7 +123,7 @@ const TagField = ({ field, fieldState }: Props) => {
                         className="w-full justify-start rounded-none"
                         onClick={() => setShowTagInput(!showTagInput)}
                     >
-                        {t("features.projects.form.project.tag.creation")}
+                        {t("features.projects.form.tag.creation")}
                     </Button>
                 )}
             </SelectContent>

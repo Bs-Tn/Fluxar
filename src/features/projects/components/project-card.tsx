@@ -10,12 +10,14 @@ import {
 import { TypographyH3 } from "@/shared/components/ui/typography";
 import { openPath } from "@tauri-apps/plugin-opener";
 import { ProjectDocument } from "@/shared/types/database";
+import { useTranslation } from "react-i18next";
 
 type Props = {
     project: ProjectDocument;
 } & ComponentProps<"div">;
 
 const ProjectCard = ({ project, ...props }: Props) => {
+    const { t } = useTranslation();
     const tagColor = project.tag?.color;
     const projectFirstLetter = project.name.split("")[0].toUpperCase();
 
@@ -64,9 +66,11 @@ const ProjectCard = ({ project, ...props }: Props) => {
             <CardContent></CardContent>
             <CardFooter className="w-full flex justify-end gap-3">
                 <Button onClick={onFolderOpen} variant="outline">
-                    Ouvrir le dossier
+                    {t("features.dashboard.card.open-project")}
                 </Button>
-                <Button onClick={onProjectStart}>Démarrer le projet</Button>
+                <Button onClick={onProjectStart}>
+                    {t("features.dashboard.card.start-project")}
+                </Button>
             </CardFooter>
         </Card>
     );

@@ -1,31 +1,29 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { save } from "@tauri-apps/plugin-dialog";
 import { writeTextFile } from "@tauri-apps/plugin-fs";
 
-import { useTranslation } from "react-i18next";
-
-import { FolderOpen } from "lucide-react";
-
-import { Button } from "@/shared/components/ui/button";
-import { Field, FieldLabel } from "@/shared/components/ui/field";
-
-import { getBackupData } from "@/core/database/instance";
-import { settingService } from "@/core/database/settings";
-import { Setting, SettingDocument } from "@/shared/types/database";
 import { useDatabase } from "@/core/database/hooks/use-database";
 
+import { Button } from "@/shared/components/ui/button";
+import { TypographyDescription, TypographyH3 } from "@/shared/components/ui/typography";
+import { Separator } from "@/shared/components/ui/separator";
+import { Field, FieldLabel } from "@/shared/components/ui/field";
+
+import { settingService } from "@/core/database/settings";
+import { Setting, SettingDocument } from "@/shared/types/database";
+
+import { FolderOpen } from "lucide-react";
+import { getBackupData } from "@/core/database/instance";
+
 type Props = {
-    settings: SettingDocument[];
+    backupSetting: SettingDocument | undefined;
 };
 
-const backupData = await getBackupData();
-
-const BackupSettings = ({ settings }: Props) => {
+const Backup = ({ backupSetting }: Props) => {
     const { t } = useTranslation();
     const { saveToDatabase } = useDatabase();
-
-    const backupSetting = settingService.findDoc("general", "backup", settings);
 
     const [selectedPath, setSelectedPath] = useState<string | undefined>(
         backupSetting?.value ?? undefined
@@ -53,6 +51,8 @@ const BackupSettings = ({ settings }: Props) => {
 
     const handleFilePath = async () => {
         try {
+            const backupData = await getBackupData();
+
             const filePath: string | null = await save({
                 filters: [
                     {
@@ -76,20 +76,36 @@ const BackupSettings = ({ settings }: Props) => {
     };
 
     return (
-        <div className="flex flex-col gap-6">
-            <p>{t("features.settings.backup.desc")}</p>
-            <Field>
-                <FieldLabel>Emplacement du fichier de sauvegarde</FieldLabel>
-                <div className="flex flex-col gap-4 xl:flex-row xl:items-center ">
-                    <Button type="button" className="h-10 w-full xl:w-1/3" onClick={handleFilePath}>
-                        <FolderOpen />
-                        Parcourir
-                    </Button>
-                    {selectedPath && <p className="font-bold">{selectedPath}</p>}
-                </div>
-            </Field>
-        </div>
+        <Fragment>
+            <div className="w-full flex gap-5 items-center">
+                <Separator className="flex w-8" />
+                <TypographyH3>{t("features.settings.data.backup.title")}</TypographyH3>
+                <Separator className="flex flex-1" />
+            </div>
+            <div className="flex flex-col gap-5">
+                <TypographyDescription>
+                    {t("features.settings.data.backup.desc")}
+                </TypographyDescription>
+                <Field>
+                    <div className="flex flex-col xl:flex-row xl:justify-end xl:items-center">
+                        <Button type="button" className="h-10 w-40" onClick={handleFilePath}>
+                            <FolderOpen />
+                            {t("shared.browse")}
+                        </Button>
+                    </div>
+
+                    {selectedPath && (
+                        <div className="flex">
+                            <FieldLabel className="flex-1">
+                                {t("features.settings.data.backup.label")}
+                            </FieldLabel>
+                            <p className="font-bold">{selectedPath}</p>
+                        </div>
+                    )}
+                </Field>
+            </div>
+        </Fragment>
     );
 };
 
-export default BackupSettings;
+export { Backup };

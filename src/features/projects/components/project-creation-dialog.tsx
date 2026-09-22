@@ -60,13 +60,15 @@ const ProjectCreationDialog: FC<Props> = ({ open, onOpen }) => {
         <Dialog open={open} onOpenChange={onOpen} disablePointerDismissal={true}>
             <DialogContent className="flex flex-col gap-3 min-w-1/3 px-12 py-8">
                 <DialogHeader className="flex flex-col gap-3">
-                    <DialogTitle className="text-center text-2xl font-extrabold">
-                        {t("features.projects.form.project.title")}
-                    </DialogTitle>
-                    <Separator className="mx-4" />
-                    <DialogDescription>
-                        {t("features.projects.form.project.info")}
-                    </DialogDescription>
+                    <div className="flex gap-4 items-center">
+                        <Separator className="flex flex-1" />
+
+                        <DialogTitle className="text-center text-2xl font-extrabold">
+                            {t("features.projects.form.title")}
+                        </DialogTitle>
+                        <Separator className="flex flex-1" />
+                    </div>
+                    <DialogDescription>{t("features.projects.form.info")}</DialogDescription>
                 </DialogHeader>
                 <FormProvider {...methods}>
                     <form

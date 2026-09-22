@@ -23,43 +23,46 @@
         }
     },
     "features": {
-        "dashboard": {},
+        "dashboard": {
+            "card": {
+                "open-project": "Ouvir le dossier",
+                "start-project": "Démarrer"
+            }
+        },
         "projects": {
             "form": {
-                "project": {
-                    "title": "Création d'un nouveau projet",
-                    "info": "Ajouter un de vos projets afin de pouvoir l'ajouter à la surveillance et y accèder plus rapidement.",
-                    "category": {
-                        "label": "Catégorie",
-                        "other": "Autre"
-                    },
-                    "name": {
-                        "label": "Name"
-                    },
+                "title": "Création d'un nouveau projet",
+                "info": "Ajouter un de vos projets afin de pouvoir l'ajouter à la surveillance et y accèder plus rapidement.",
+                "category": {
+                    "label": "Catégorie",
+                    "other": "Autre"
+                },
+                "name": {
+                    "label": "Name"
+                },
 
-                    "tag": {
-                        "label": "Tag",
-                        "creation": "Création d'un tag",
-                        "placeholder": "Nom du tag"
+                "tag": {
+                    "label": "Tag",
+                    "creation": "Création d'un tag",
+                    "placeholder": "Nom du tag"
+                },
+                "directory-path": {
+                    "label": "Séléctionner le dossier du projet",
+                    "desc-api": "Veuillez sélectionner le dossier qui contient le fichier de la solution <bold>.sln</bold>",
+                    "desc-other": "Veuillez sélectionner le dossier qui contient le fichier <bold>package.json</bold>"
+                },
+                "url-endpoint": {
+                    "label": "Endpoint de test pour l'API",
+                    "desc": "Indiquez l'adresse URL que l'application doit appeler pour s'assurer que votre API répond correctement.",
+                    "placeholder": "Saisissez l'URL de ping..."
+                },
+                "error": {
+                    "name": {
+                        "required": "Le nom du projet est obligatoire",
+                        "invalid": "Le nom n'est pas valide",
+                        "length": "Le nom doit contenir entre 3 et 30 caractères"
                     },
-                    "directory-path": {
-                        "label": "Séléctionner le dossier du projet",
-                        "desc-api": "Veuillez sélectionner le dossier qui contient le fichier de la solution <bold>.sln</bold>",
-                        "desc-other": "Veuillez sélectionner le dossier qui contient le fichier <bold>package.json</bold>"
-                    },
-                    "url-endpoint": {
-                        "label": "Endpoint de test pour l'API",
-                        "desc": "Indiquez l'adresse URL que l'application doit appeler pour s'assurer que votre API répond correctement.",
-                        "placeholder": "Saisissez l'URL de ping..."
-                    },
-                    "error": {
-                        "name": {
-                            "required": "Le nom du projet est obligatoire",
-                            "invalid": "Le nom n'est pas valide",
-                            "length": "Le nom doit contenir entre 3 et 30 caractères"
-                        },
-                        "url-endpoint": "L'URL doit commencer par http:// ou https://"
-                    }
+                    "url-endpoint": "L'URL doit commencer par http:// ou https://"
                 }
             }
         },
@@ -67,13 +70,23 @@
             "general": {
                 "title": "Général"
             },
-            "backup": {
-                "title": "Sauvegarde",
-                "desc": "Choisissez un dossier local pour sauvegarder automatiquement une copie de vos données. Cela vous permet de restaurer vos informations en cas de problème avec l'application."
+            "data": {
+                "title": "Données",
+                "backup": {
+                    "title": "Sauvegarde",
+                    "label": "Emplacement du fichier de sauvegarde",
+                    "desc": "Choisissez un dossier local pour enregistrer automatiquement une copie de vos données. Cela vous permettra de restaurer vos informations en cas de problème avec l'application."
+                },
+                "sync": {
+                    "title": "Synchronisation ",
+                    "label": "Synchroniser les données avec le fichiers de sauvegarde",
+                    "action": "Synchroniser",
+                    "desc": "En cas d'erreur ou de perte de données, cette action vous permet de resynchroniser vos données à partir de l'emplacement de sauvegarde que vous avez défini."
+                }
             },
             "language": {
                 "title": "Langue",
-                "desc": "Choisissez la langue d'affichage de l'application.",
+                "label": "Choisissez la langue d'affichage de l'application.",
                 "name": {
                     "fr": "Français",
                     "en-GB": "Anglais"
@@ -96,8 +109,8 @@
             "all": "Tous les projets",
             "frontend": "Frontend",
             "api": "Api",
-            "package": "Package",
-            "other": "Autres"
+            "package": "Paquet",
+            "other": "Autre"
         }
     }
 }

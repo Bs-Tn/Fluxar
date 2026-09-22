@@ -66,12 +66,22 @@
             "general": {
                 "title": "General"
             },
-            "backup": {
-                "title": "Backup",
-                "desc": "Choose a local folder to automatically save a copy of your data. This allows you to restore your information if an issue occurs with the application."
+            "data": {
+                "title": "Data",
+                "backup": {
+                    "title": "Backup",
+                    "label": "Emplacement du fichier de sauvegarde",
+                    "desc": "Choose a local folder to automatically save a copy of your data. This allows you to restore your information if an issue occurs with the application."
+                },
+                "sync": {
+                    "title": "Synchronization",
+                    "label": "Synchroniser les données avec le fichiers de sauvegarde",
+                    "desc": "Choose a local folder to automatically save a copy of your data. This allows you to restore your information if an issue occurs with the application."
+                }
             },
             "language": {
                 "title": "Language",
+
                 "desc": "Choose the display language for the application.",
                 "name": {
                     "fr": "French",

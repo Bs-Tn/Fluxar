@@ -12,9 +12,13 @@
         },
         "dialog:default",
         "dialog:allow-save",
-        "fs:scope",
+        {
+            "identifier": "fs:scope",
+            "allow": [{ "path": "**", "app": true }]
+        },
         "fs:allow-read-dir",
         "fs:allow-read",
+        "fs:allow-read-text-file",
         "fs:allow-write-text-file"
     ]
 }
