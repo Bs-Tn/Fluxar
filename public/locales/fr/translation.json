@@ -71,7 +71,7 @@
                 "title": "Général"
             },
             "data": {
-                "title": "Données",
+                "title": "Données & Sync",
                 "backup": {
                     "title": "Sauvegarde",
                     "label": "Emplacement du fichier de sauvegarde",
@@ -81,7 +81,10 @@
                     "title": "Synchronisation ",
                     "label": "Synchroniser les données avec le fichiers de sauvegarde",
                     "action": "Synchroniser",
-                    "desc": "En cas d'erreur ou de perte de données, cette action vous permet de resynchroniser vos données à partir de l'emplacement de sauvegarde que vous avez défini."
+                    "desc": "En cas d'erreur ou de perte de données, cette action vous permet de resynchroniser vos données à partir de l'emplacement de sauvegarde que vous avez défini.",
+                    "error": {
+                        "common": "Une erreur est survenue en chargant le fichier !"
+                    }
                 }
             },
             "language": {

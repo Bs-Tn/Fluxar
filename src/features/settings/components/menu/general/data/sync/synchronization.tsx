@@ -23,12 +23,14 @@ const Synchronization = ({ backupPath }: Props) => {
     const handleSyncDatabaseWithFile = async () => {
         try {
             // TODO if setting value not found open a dialog to let the user choose the file
+            setErrorMessage(undefined);
             if (backupPath) {
                 const rawData = await readTextFile(backupPath);
 
                 const isSyncCompleted = synchronizeData(rawData);
 
-                if (!isSyncCompleted) setErrorMessage("");
+                if (!isSyncCompleted)
+                    setErrorMessage(t("features.settings.data.sync.error.common"));
             }
         } catch (error) {
             console.error(error);
@@ -62,6 +64,9 @@ const Synchronization = ({ backupPath }: Props) => {
                             {t("features.settings.data.sync.action")}
                         </Button>
                     </div>
+                    {errorMessage && (
+                        <p className="text-destructive font-semibold">{errorMessage}</p>
+                    )}
                 </Field>
             </div>
         </Fragment>
