@@ -11,14 +11,14 @@ type Props = {
 
 const DataSettings = ({ settings }: Props) => {
     const backupSetting = settingService.findDoc("general", "backup", settings);
-
+    console.log(backupSetting);
     return (
         <div className="flex flex-col gap-8">
             <section>
                 <Backup backupSetting={backupSetting} />
             </section>
             <section>
-                <Synchronization backupPath={backupSetting?.value} />
+                <Synchronization backupSetting={backupSetting} />
             </section>
         </div>
     );

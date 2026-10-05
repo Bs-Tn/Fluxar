@@ -1,40 +1,89 @@
 import { Fragment, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { FolderSync } from "lucide-react";
 
 import { readTextFile } from "@tauri-apps/plugin-fs";
+import { open } from "@tauri-apps/plugin-dialog";
+
+import { useDatabase } from "@/core/database/hooks/use-database";
+import { settingService } from "@/core/database/settings";
+
+import { Setting, SettingDocument } from "@/shared/types/database";
 
 import { Button } from "@/shared/components/ui/button";
 import { TypographyDescription, TypographyH3 } from "@/shared/components/ui/typography";
 import { Separator } from "@/shared/components/ui/separator";
 import { Field, FieldLabel } from "@/shared/components/ui/field";
 
-import { FolderSync } from "lucide-react";
-import { synchronizeData } from "@/core/database/instance";
-
 type Props = {
-    backupPath: string | undefined;
+    backupSetting: SettingDocument | undefined;
 };
 
-const Synchronization = ({ backupPath }: Props) => {
+const Synchronization = ({ backupSetting }: Props) => {
     const { t } = useTranslation();
+    const { synchronizeData, saveToDatabase } = useDatabase();
 
     const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
 
+    const backupPath = backupSetting?.value;
+
+    const onSync = async (filePath: string): Promise<boolean> => {
+        try {
+            const rawData = await readTextFile(filePath);
+            const isSyncCompleted = synchronizeData(rawData);
+            return isSyncCompleted;
+        } catch (error) {
+            return false;
+        }
+    };
+
+    // TODO DO two function; one to create and one to update
+    const onFallbackSync = async <T extends SettingDocument | Setting<"backup">>(
+        setting: T,
+        callback: (setting: T) => Promise<PouchDB.Core.Response | void>
+    ) => {
+        try {
+            // Select the backup file
+            const filePath: string | null = await open();
+            if (filePath) {
+                const isSyncCompleted = await onSync(filePath);
+
+                if (!isSyncCompleted) {
+                    setErrorMessage(t("features.settings.data.sync.error.invalid-file"));
+                    return;
+                }
+
+                // Saving the file into the database
+                const updateSetting: T = { ...setting, value: filePath };
+
+                await saveToDatabase<T, PouchDB.Core.Response | void>(updateSetting, callback);
+            } else console.error("An error occured to synchronized the data.");
+        } catch (error) {
+            throw error;
+        }
+    };
+
     const handleSyncDatabaseWithFile = async () => {
         try {
-            // TODO if setting value not found open a dialog to let the user choose the file
             setErrorMessage(undefined);
+
             if (backupPath) {
-                const rawData = await readTextFile(backupPath);
-
-                const isSyncCompleted = synchronizeData(rawData);
-
-                if (!isSyncCompleted)
-                    setErrorMessage(t("features.settings.data.sync.error.common"));
+                const isSyncCompleted = await onSync(backupPath);
+                if (!isSyncCompleted) {
+                    const setting: SettingDocument = { ...backupSetting! };
+                    onFallbackSync<SettingDocument>(setting, settingService.updateDoc);
+                }
+            } else {
+                const setting: Setting<"backup"> = {
+                    parent: "general",
+                    name: "backup",
+                    value: "",
+                };
+                onFallbackSync<Setting<"backup">>(setting, settingService.createDoc);
             }
         } catch (error) {
-            console.error(error);
-            return null;
+            console.error("An error occured to synchronized the data.");
+            setErrorMessage(t("features.settings.data.sync.error.common"));
         }
     };
 

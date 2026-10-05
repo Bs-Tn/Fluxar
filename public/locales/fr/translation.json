@@ -2,8 +2,8 @@
     "core": {
         "layout": {
             "header": {
-                "title": "Tableau de Bord",
-                "desc": "Surveillance des projets"
+                "title": "Catalogue de projets",
+                "desc": "Organiser, parcourir et retrouver vos projets de développement"
             },
             "sidebar": {
                 "new-project": "Nouveau projet",
@@ -83,7 +83,8 @@
                     "action": "Synchroniser",
                     "desc": "En cas d'erreur ou de perte de données, cette action vous permet de resynchroniser vos données à partir de l'emplacement de sauvegarde que vous avez défini.",
                     "error": {
-                        "common": "Une erreur est survenue en chargant le fichier !"
+                        "common": "Une erreur est survenue en chargant le fichier.",
+                        "invalid-file": "La synchronisation a échoué car le fichier est invalide."
                     }
                 }
             },

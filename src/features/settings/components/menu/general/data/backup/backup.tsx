@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { save } from "@tauri-apps/plugin-dialog";
@@ -15,7 +15,6 @@ import { settingService } from "@/core/database/settings";
 import { Setting, SettingDocument } from "@/shared/types/database";
 
 import { FolderOpen } from "lucide-react";
-import { getBackupData } from "@/core/database/instance";
 
 type Props = {
     backupSetting: SettingDocument | undefined;
@@ -23,11 +22,16 @@ type Props = {
 
 const Backup = ({ backupSetting }: Props) => {
     const { t } = useTranslation();
-    const { saveToDatabase } = useDatabase();
+    const { getBackupData, saveToDatabase } = useDatabase();
 
     const [selectedPath, setSelectedPath] = useState<string | undefined>(
         backupSetting?.value ?? undefined
     );
+
+    useEffect(() => {
+        console.log(backupSetting);
+        if (backupSetting) setSelectedPath(backupSetting.value);
+    }, [backupSetting]);
 
     const createOrUpdateBackupSetting = async (filePath: string) => {
         if (backupSetting) {
@@ -44,7 +48,7 @@ const Backup = ({ backupSetting }: Props) => {
             };
             await saveToDatabase<Setting<"backup">, PouchDB.Core.Response>(
                 setting,
-                settingService.createOrUpdateDoc
+                settingService.createDoc
             );
         }
     };

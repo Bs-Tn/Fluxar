@@ -3,7 +3,7 @@ import { database } from "./instance";
 import { Setting, SettingDocument, SettingName, SettingParent } from "@/shared/types/database";
 import { PouchSettingsDb } from "./types";
 
-const createOrUpdateDoc = async <K extends SettingName>(
+const createDoc = async <K extends SettingName>(
     setting: Setting<K>
 ): Promise<PouchDB.Core.Response> => {
     const newSetting: PouchSettingsDb<SettingName> = {
@@ -53,7 +53,7 @@ const findDoc = (
     settings.find((s) => s.parent === settingParent && s.name === settingName);
 
 export const settingService = {
-    createOrUpdateDoc,
+    createDoc,
     updateDoc,
     getAllDoc,
     deleteDoc,
