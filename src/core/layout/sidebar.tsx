@@ -4,7 +4,7 @@ import { EmblaOptionsType } from "embla-carousel";
 import { Package, Monitor, PlugZap, Plus, LayoutGrid, SlidersVertical, Layers } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
 import { useTranslation } from "react-i18next";
-import { ProjectCreationDialog } from "../../features/projects/components/project-creation-dialog";
+import { CreationDialog } from "../../features/projects/components/creation-dialog";
 import { ProjectCategory } from "@/shared/types/common";
 import { t } from "i18next";
 import { SettingsMenu } from "../../features/settings/components/settings-menu";
@@ -33,7 +33,7 @@ const Sidebar = () => {
     return (
         <Fragment>
             {/* DIALOG */}
-            <ProjectCreationDialog open={openProjectCreation} onOpen={setOpenProjectCreation} />
+            <CreationDialog open={openProjectCreation} onOpen={setOpenProjectCreation} />
             {openSettings && <SettingsMenu open={openSettings} onOpen={setOpenSettings} />}
             {/* ========================= */}
 

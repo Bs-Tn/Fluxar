@@ -5,6 +5,8 @@ import { ProjectCategory } from "@/shared/types/form";
 type BaseDocFields = {
     _id: string;
     _rev?: string;
+    createdAt: string;
+    modifiedAt: string;
 };
 
 // =============================

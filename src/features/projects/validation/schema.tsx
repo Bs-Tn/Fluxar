@@ -3,7 +3,7 @@ import { ProjectCategoryValue } from "@/shared/types/form";
 import i18n from "i18next";
 import { tagSchema } from "./tag.schema";
 
-export const projectSchema = z.object({
+export const schema = z.object({
     category: z.enum([
         ProjectCategoryValue.FRONTEND,
         ProjectCategoryValue.API,
@@ -30,4 +30,4 @@ export const projectSchema = z.object({
     urlEndpoint: z.string().optional(),
 });
 
-export type ProjectSchema = z.infer<typeof projectSchema>;
+export type ProjectSchema = z.infer<typeof schema>;

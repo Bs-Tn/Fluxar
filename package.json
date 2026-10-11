@@ -27,6 +27,7 @@
         "i18next-browser-languagedetector": "^8.2.1",
         "i18next-http-backend": "^3.0.5",
         "lucide-react": "^1.11.0",
+        "motion": "^14.0.0",
         "pouchdb": "^9.0.0",
         "pouchdb-find": "^9.0.0",
         "react": "^19.3.0",

@@ -8,7 +8,7 @@ import {
     DialogTitle,
 } from "@/shared/components/ui/dialog";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import { projectSchema, ProjectSchema } from "../validation/project.schema";
+import { schema, ProjectSchema } from "../validation/schema";
 import { Button } from "@/shared/components/ui/button";
 import { ProjectCategoryValue } from "@/shared/types/form";
 import { Separator } from "@/shared/components/ui/separator";
@@ -16,18 +16,18 @@ import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Project } from "@/shared/types/database";
 import { projectService } from "@/core/database/project";
-import { ProjectCreationForm } from "./project-creation-form";
+import { ProjectCreationForm } from "./creation-form";
 
 type Props = {
     open: boolean;
     onOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-const ProjectCreationDialog: FC<Props> = ({ open, onOpen }) => {
+const CreationDialog: FC<Props> = ({ open, onOpen }) => {
     const { t } = useTranslation();
 
     const methods = useForm<ProjectSchema>({
-        resolver: zodResolver(projectSchema),
+        resolver: zodResolver(schema),
         defaultValues: {
             category: ProjectCategoryValue.FRONTEND,
             name: "",
@@ -109,4 +109,4 @@ const ProjectCreationDialog: FC<Props> = ({ open, onOpen }) => {
     );
 };
 
-export { ProjectCreationDialog };
+export { CreationDialog };
