@@ -29,7 +29,6 @@ const Backup = ({ backupSetting }: Props) => {
     );
 
     useEffect(() => {
-        console.log(backupSetting);
         if (backupSetting) setSelectedPath(backupSetting.value);
     }, [backupSetting]);
 
@@ -60,7 +59,7 @@ const Backup = ({ backupSetting }: Props) => {
             const filePath: string | null = await save({
                 filters: [
                     {
-                        name: "fluxar",
+                        name: "db-backup-fluxar",
                         extensions: ["json"],
                     },
                 ],

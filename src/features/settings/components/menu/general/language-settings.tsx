@@ -63,7 +63,7 @@ const LanguageSettings = ({ settings }: Props) => {
             };
             await saveToDatabase<Setting<"language">, PouchDB.Core.Response>(
                 setting,
-                settingService.createOrUpdateDoc
+                settingService.createDoc
             );
         }
     };

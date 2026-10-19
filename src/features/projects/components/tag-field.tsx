@@ -48,6 +48,7 @@ const TagField = ({ field, fieldState }: Props) => {
         onChange(selectedTag!);
     };
 
+    // TODO Check if the tag's name already exist
     const onTagCreation = async () => {
         try {
             const tagColor = generateRandomHexColor();

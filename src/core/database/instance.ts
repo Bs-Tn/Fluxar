@@ -1,9 +1,10 @@
 import PouchDB from "pouchdb";
 import PouchFind from "pouchdb-find";
+import { AnyPouchDoc } from "./types";
 
 PouchDB.plugin(PouchFind);
 
-const database = new PouchDB("fluxar");
+const database = new PouchDB<AnyPouchDoc>("fluxar");
 
 // Create an index once
 await database.createIndex({

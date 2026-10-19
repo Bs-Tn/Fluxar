@@ -19,12 +19,12 @@ import { Button } from "@/shared/components/ui/button";
 
 type Props = {
     project: ProjectDocument;
-} & ComponentProps<"div">;
+};
 
 const MotionCard = motion.create(Card);
 const MotionCardTitle = motion.create(CardTitle);
 
-const CardSummary = ({ project, ...props }: Props) => {
+const CardSummary = ({ project }: Props) => {
     const { t } = useTranslation();
 
     const [open, setOpen] = useState<boolean>(false);
@@ -111,7 +111,7 @@ const CardSummary = ({ project, ...props }: Props) => {
                 <CardFooter className="flex justify-between">
                     <div className=" flex gap-2 items-center text-xs text-switch-background">
                         <CalendarFold size={20} />
-                        <p>{project.createdAt}</p>
+                        <p>{project.modifiedAt}</p>
                     </div>
                     <div className="flex items-center gap-2 text-xs text-switch-background">
                         <p>Voir détails</p>
