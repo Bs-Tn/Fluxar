@@ -8,6 +8,8 @@ export const ProjectCategory = {
     OTHER: "other",
 } as const;
 
+export type ProjectCategoryType = "all" | "frontend" | "api" | "package" | "other";
+
 export type Documents = {
     projectDocuments: ProjectDocument[];
     tagDocuments: TagDocument[];

@@ -2,8 +2,12 @@
     "core": {
         "layout": {
             "header": {
-                "title": "Catalogue de projets",
-                "desc": "Organiser, parcourir et retrouver vos projets de développement"
+                "titles": {
+                    "centralize": "centraliser",
+                    "visualize": "visualiser",
+                    "find": "retrouver"
+                },
+                "desc": "Chaque projet visible. Rien ne se perd, rien ne déborde."
             },
             "sidebar": {
                 "new-project": "Nouveau projet",
@@ -110,11 +114,12 @@
         "online": "En ligne",
         "offline": "Hors ligne",
         "categories": {
-            "all": "Tous les projets",
+            "all": "Tous",
+            "all-projects": "Tous les projets",
             "frontend": "Frontend",
-            "api": "Api",
-            "package": "Paquet",
-            "other": "Autre"
+            "api": "APIs",
+            "package": "Packages",
+            "other": "Autres"
         }
     }
 }

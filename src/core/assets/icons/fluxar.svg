@@ -1,0 +1,50 @@
+ <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="1024"
+                                height="1024"
+                                viewBox="0 0 1024 1024"
+                            >
+                                <rect width="1024" height="1024" rx="230" fill="#2383E2" />
+                                <g
+                                    fill="none"
+                                    stroke="#FFFFFF"
+                                    stroke-width="37"
+                                    stroke-dasharray="57 71"
+                                    stroke-linecap="round"
+                                >
+                                    <line x1="541" y1="483" x2="199" y2="170" />
+                                    <line x1="541" y1="483" x2="882" y2="256" />
+                                    <line x1="541" y1="483" x2="825" y2="739" />
+                                    <line x1="541" y1="483" x2="427" y2="825" />
+                                    <line x1="541" y1="483" x2="170" y2="682" />
+                                </g>
+                                <polygon
+                                    fill="#FFFFFF"
+                                    points="541,341 669,415 669,554 541,626 412,554 412,415"
+                                />
+                                <polygon
+                                    fill="#FFFFFF"
+                                    opacity="0.8"
+                                    points="199,57 299,115 299,226 199,284 100,226 100,115"
+                                />
+                                <polygon
+                                    fill="#FFFFFF"
+                                    opacity="0.6"
+                                    points="882,142 981,199 981,313 882,370 782,313 782,199"
+                                />
+                                <polygon
+                                    fill="#FFFFFF"
+                                    opacity="0.7"
+                                    points="825,653 924,710 924,825 825,881 725,825 725,710"
+                                />
+                                <polygon
+                                    fill="#FFFFFF"
+                                    opacity="0.5"
+                                    points="427,739 526,796 526,910 427,967 327,910 327,796"
+                                />
+                                <polygon
+                                    fill="#FFFFFF"
+                                    opacity="0.65"
+                                    points="170,597 256,647 256,739 170,782 85,739 85,647"
+                                />
+                            </svg>

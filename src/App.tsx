@@ -1,11 +1,11 @@
 import { createContext, useState } from "react";
 import "./App.css";
 import { Header } from "./core/layout/header";
-import { Sidebar } from "./core/layout/sidebar";
 import { RootContextType } from "./shared/types/context";
 import { useDatabase } from "./core/database/hooks/use-database";
 import { ProjectCategory } from "./shared/types/common";
 import { Dashboard } from "./features/dashboard/dashboard";
+import { StartupScreen } from "./core/layout/startup-screen";
 
 export const RootContext = createContext<RootContextType>({
     documents: {
@@ -24,27 +24,28 @@ function App() {
     );
 
     return (
-        <div className="flex flex-col gap-6 h-screen">
-            <RootContext.Provider
-                value={{
-                    documents: {
-                        projectDocuments: projects,
-                        tagDocuments: tags,
-                        settingDocuments: settings,
-                    },
-                    selectedProjectCategory,
-                    setSelectedProjectCategory,
-                }}
-            >
+        <RootContext.Provider
+            value={{
+                documents: {
+                    projectDocuments: projects,
+                    tagDocuments: tags,
+                    settingDocuments: settings,
+                },
+                selectedProjectCategory,
+                setSelectedProjectCategory,
+            }}
+        >
+            {/* <StartupScreen> */}
+            <div className="flex flex-col gap-4 h-screen">
                 <Header />
                 <div className="flex w-full h-full">
-                    <Sidebar />
-                    <main className="w-full bg-background p-6">
+                    <main className="w-full bg-background px-6 pb-6">
                         <Dashboard />
                     </main>
                 </div>
-            </RootContext.Provider>
-        </div>
+            </div>
+            {/* </StartupScreen> */}
+        </RootContext.Provider>
     );
 }
 

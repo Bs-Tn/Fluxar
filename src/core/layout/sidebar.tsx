@@ -1,13 +1,17 @@
-import { Fragment, JSX, useState } from "react";
+import { Fragment, JSX, useContext, useState } from "react";
 import ProjectCarousel from "@/shared/components/ui/carousel/carousel";
 import { EmblaOptionsType } from "embla-carousel";
 import { Package, Monitor, PlugZap, Plus, LayoutGrid, SlidersVertical, Layers } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
 import { useTranslation } from "react-i18next";
 import { CreationDialog } from "../../features/projects/components/creation-dialog";
-import { ProjectCategory } from "@/shared/types/common";
+import { ProjectCategory, ProjectCategoryType } from "@/shared/types/common";
 import { t } from "i18next";
 import { SettingsMenu } from "../../features/settings/components/settings-menu";
+import { FilterOption, Filter } from "@/shared/components/ui/filter";
+import { RootContextType } from "@/shared/types/context";
+import { RootContext } from "@/App";
+import { TypographyH2 } from "@/shared/components/ui/typography";
 
 export type SlideType = {
     path: string;
@@ -15,43 +19,46 @@ export type SlideType = {
     label: string;
 };
 
-const SLIDES = [
-    { path: ProjectCategory.ALL, icon: <LayoutGrid />, label: t("shared.categories.all") },
-    { path: ProjectCategory.FRONTEND, icon: <Monitor />, label: t("shared.categories.frontend") },
-    { path: ProjectCategory.API, icon: <PlugZap />, label: t("shared.categories.api") },
-    { path: ProjectCategory.PACKAGE, icon: <Package />, label: t("shared.categories.package") },
-    { path: ProjectCategory.OTHER, icon: <Layers />, label: t("shared.categories.other") },
-];
-const OPTIONS: EmblaOptionsType = { loop: true, axis: "y", align: "center" };
+const STATUS_FILTERS = [
+    { value: ProjectCategory.ALL, label: t("shared.categories.all") },
+    { value: ProjectCategory.FRONTEND, label: t("shared.categories.frontend") },
+    { value: ProjectCategory.API, label: t("shared.categories.api") },
+    { value: ProjectCategory.PACKAGE, label: t("shared.categories.package") },
+    { value: ProjectCategory.OTHER, label: t("shared.categories.other") },
+] as const satisfies readonly FilterOption<ProjectCategoryType>[];
 
 const Sidebar = () => {
     const { t } = useTranslation();
+    const { setSelectedProjectCategory } = useContext<RootContextType>(RootContext);
 
     const [openProjectCreation, setOpenProjectCreation] = useState<boolean>(false);
     const [openSettings, setOpenSettings] = useState<boolean>(false);
-
+    const [status, setStatus] = useState<ProjectCategoryType>(ProjectCategory.ALL);
     return (
         <Fragment>
             {/* DIALOG */}
             <CreationDialog open={openProjectCreation} onOpen={setOpenProjectCreation} />
-            {openSettings && <SettingsMenu open={openSettings} onOpen={setOpenSettings} />}
             {/* ========================= */}
 
             <div className="flex flex-col pb-6">
                 <nav className="w-50 h-full flex flex-col items-center bg-background ">
-                    <Button
+                    {/* <Button
                         className="font-bold hover:scale-103"
                         size="xl"
                         onClick={() => setOpenProjectCreation(true)}
                     >
                         <Plus className="font-bold" />
                         {t("core.layout.sidebar.new-project")}
-                    </Button>
-                    <ProjectCarousel
-                        className="h-3/4 items-center"
-                        slides={SLIDES}
-                        options={OPTIONS}
-                    />
+                    </Button> */}
+                    <div className="flex flex-col items-center gap-4 mt-6">
+                        <TypographyH2>Filtres</TypographyH2>
+                        <Filter
+                            options={STATUS_FILTERS}
+                            value={status}
+                            onChange={setStatus}
+                            ariaLabel="Filtrer les projets par statut"
+                        />
+                    </div>
                 </nav>
                 <Button
                     className="flex gap-2 items-center justify-center mx-auto font-bold hover:text-primary hover:bg-transparent"

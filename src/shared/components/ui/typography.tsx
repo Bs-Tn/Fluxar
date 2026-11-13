@@ -4,8 +4,11 @@ import { ComponentProps, FC, PropsWithChildren } from "react";
 const TypographyH1: FC<PropsWithChildren & ComponentProps<"h1">> = ({ children, ...props }) => {
     return (
         <h1
-            className="scroll-m-20 text-center text-4xl font-extrabold tracking-tight text-balance"
             {...props}
+            className={cn(
+                "scroll-m-20 text-center text-4xl font-extrabold tracking-tight text-balance",
+                props.className
+            )}
         >
             {children}
         </h1>
@@ -15,8 +18,11 @@ const TypographyH1: FC<PropsWithChildren & ComponentProps<"h1">> = ({ children, 
 const TypographyH2: FC<PropsWithChildren & ComponentProps<"h2">> = ({ children, ...props }) => {
     return (
         <h2
-            className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0"
             {...props}
+            className={cn(
+                "scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0",
+                props.className
+            )}
         >
             {children}
         </h2>
@@ -30,11 +36,11 @@ const TypographyH3: FC<PropsWithChildren & ComponentProps<"h3">> = ({
 }) => {
     return (
         <h3
+            {...props}
             className={cn(
                 "scroll-m-20 pb-2 text-2xl font-semibold tracking-tight first:mt-0",
                 className
             )}
-            {...props}
         >
             {children}
         </h3>
